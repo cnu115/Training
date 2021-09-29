@@ -9,6 +9,8 @@
         <div class="alert alert-warning hidden" id="warning">
 <!--            <strong>Warning!</strong> error-->
         </div>
+
+        <h3 >Registration</h3>
         <form>
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -26,6 +28,7 @@
         </form>
         <br />
         <br />
+        <h3 >Login</h3>
         <form>
             <div class="form-group">
                 <label for="email">Email address:</label>
@@ -39,7 +42,46 @@
         </form>
     </div>
 </body>
+<script>
+    //Promises
+    const b = () => {
+        return new Promise(((resolve, reject) => {
+            try {
+                window.setTimeout(() => {
+                    // console.log('c function value ',2)
+                    // return 2;
+                    return resolve(2);
+                }, 500)
+            }catch (e) {
+                reject(e)
+            }
 
+        }))
+
+    }
+    const a = 1;
+    // console.log('calculation ', a+b());
+    // console.log('b value ', b());
+    b().then(res => {
+        console.log('then function res ', res);
+        const c = a + res;
+        console.log(c)
+    }).catch(err =>{
+        console.log('error ', err)
+    })
+    console.log('a ', a);
+
+
+    // async and await
+    const cal = async () => {
+        const bValue = await b();
+        console.log('async cal ', a+ bValue);
+    }
+
+    cal();
+
+
+</script>
 <script>
     const errorHandling = (identifier, action) => {
         const warning =  document.getElementById('warning');
@@ -72,9 +114,9 @@
 
            alert('data stored successfully!');
 
-           window.setTimeout(() => {
-               location.reload();
-           }, 500);
+           // window.setTimeout(() => {
+           //     location.reload();
+           // }, 500);
            //
            // //clearTimeout(timeOut)
            //
@@ -101,7 +143,7 @@
         warning.innerHTML = '';
         // debugger;
         if(emailValue === emailValueFromDb && passwoedValue === passwordValueFromDb){
-            alert('authentication successfull')
+            alert('authentication successful')
         }else{
             errorHandling('', '');
         }
