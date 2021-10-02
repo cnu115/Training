@@ -1,11 +1,11 @@
 import Nav from "./Navigation/Nav";
 
-function Demo() {
+const Demo = () => {
+    const container = "container"
     return(
-        <div>
+        <div className={`${container}`}>
             <Nav />
             <h1>Demo</h1>
-
         </div>
     )
 }
