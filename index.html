@@ -44,51 +44,84 @@
 </body>
 <script>
     //Promises
-    const b = () => {
-        return new Promise(((resolve, reject) => {
-            try {
-                window.setTimeout(() => {
-                    // console.log('c function value ',2)
-                    // return 2;
-                    return resolve(2);
-                }, 500)
-            }catch (e) {
-                reject(e)
-            }
+    // const b = () => {
+    //     return new Promise(((resolve, reject) => {
+    //         try {
+    //             window.setTimeout(() => {
+    //                 // console.log('c function value ',2)
+    //                 // return 2;
+    //                 return resolve(2);
+    //             }, 500)
+    //         }catch (e) {
+    //             reject(e)
+    //         }
 
-        }))
+    //     }))
 
-    }
-    const a = 1;
-    // console.log('calculation ', a+b());
-    // console.log('b value ', b());
-    b().then(res => {
-        console.log('then function res ', res);
-        const c = a + res;
-        console.log(c)
-    }).catch(err =>{
-        console.log('error ', err)
-    })
-    console.log('a ', a);
+    // }
+    // const a = 1;
+    // // console.log('calculation ', a+b());
+    // // console.log('b value ', b());
+    // b().then(res => {
+    //     console.log('then function res ', res);
+    //     const c = a + res;
+    //     console.log(c)
+    // }).catch(err =>{
+    //     console.log('error ', err)
+    // })
+    // console.log('a ', a);
 
 
-    // async and await
-    const cal = async () => {
-        const bValue = await b();
-        console.log('async cal ', a+ bValue);
-    }
+    // // async and await
+    // const cal = async () => {
+    //     const bValue = await b();
+    //     console.log('async cal ', a+ bValue);
+    // }
 
-    cal();
+    // cal();
 
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-        .then(response => response.json())
-        .then(json => console.log(json))
+    // fetch('https://jsonplaceholder.typicode.com/todos/1')
+    //     .then(response => response.json())
+    //     .then(json => console.log(json))
 
 
 
 
 </script>
 <script>
+    // console.log('this ', this);
+    // console.log(this === window)
+
+    const addValues = {
+        a: 5,
+        b: 6,
+        cal: function(){
+            return 'cal return'
+        }
+    }
+
+    function add(c,d) {
+        // console.log(this.cal());
+        // debugger;
+        // const sum = ;
+        console.log('add functon ths ', this);
+        // debugger;
+        // console.log('sum', this.a+this.b+c+d)
+        // console.log('taccrow funcation ', this);
+        // return 5;
+    }
+    // bind, applay, call
+    const sum = add.bind(addValues,1,2);
+    // add()
+    // console.log(sum())
+    sum();
+
+
+
+
+
+
+
     const errorHandling = (identifier, action) => {
         const warning =  document.getElementById('warning');
         warning.classList.remove('hidden');
@@ -103,6 +136,17 @@
        return localStorage.getItem(name)
     }
     const registration = () => {
+        const obj = {
+            a: 1,
+            b: 2,
+            cal: function(){
+                console.log('obj this ', this)
+                console.log(this.a)
+            }
+        }
+        // console.log('obj ',obj.cal());
+        obj.cal();
+        console.log('function ', this)
         const warning =  document.getElementById('warning');
         warning.innerHTML = '';
        const name= document.getElementById('name');
