@@ -7,6 +7,9 @@
 // }
 
 import React, {Component} from 'react';
+import ClassB from "../Components/ClassB";
+import ClassC from "../Components/ClassC";
+
 class Home extends Component{
     state = {
         a:1,
@@ -21,8 +24,14 @@ class Home extends Component{
     }
     render() {
         // console.log(this.state)
+        // const obj ={
+        //     name1: 'Abhi',
+        //     address1: 'hyd'
+        // }
         return(
             <div>
+                <ClassB name='cnu' address={"hyd"}/>
+                {/*<ClassC name='cnu' address={"hyd"} addr={obj}/>*/}
                 Home page <br />
 
                 <span>a value {this.state.a}</span> <br />
