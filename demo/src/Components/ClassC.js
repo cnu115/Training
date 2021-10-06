@@ -1,10 +1,11 @@
 import React from 'react';
 
-class ClassC extends React.Component{
+class ClassC extends React.Component {
+
     constructor(props) {
         super(props);
         // console.log('constructor')
-        console.log('class C ', props)
+        // console.log('class C ', props)
         // const {name, address, addr} = props; // const name = props.name // const address = props.address
         // console.log('name', name, 'address ', address, 'addr', addr)
         // const {name1, address1 } = addr;
@@ -14,9 +15,10 @@ class ClassC extends React.Component{
         // console.log('name1', name1)
     }
 
+
     render() {
         console.log('render', this.props)
-        return(
+        return (
             <div>
                 <h1>Home child class comp</h1>
             </div>
