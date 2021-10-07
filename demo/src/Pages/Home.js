@@ -1,35 +1,28 @@
-// const Home = () => {
-//     return(
-//         <div>
-//             <h1>Home page</h1>
-//         </div>
-//     )
-// }
-
 import React, {Component} from 'react';
-// import ClassB from "../Components/ClassB";
-// import ClassC from "../Components/ClassC";
+import './Home.css';
 
-class Home extends Component{
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            a:1,
             userInfo: [],
-            arr: []
         }
         console.log('constructor')
     }
-    add = () => {
-        // alert('alert')
-        this.setState({
-            a: 4,
-            arr: [2,3]
-        })
-    }
+
     componentDidMount() {
         console.log('componentDidMount');
-        
+        this.userData();
+    }
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    // }
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount')
+    }
+
+    userData = () => {
         fetch('https://reqres.in/api/users?page=2', {
             method: 'GET'
         })
@@ -39,44 +32,37 @@ class Home extends Component{
                 this.setState({
                     userInfo: res.data
                 })
-            })
-            // .then(response => {
-            //     // console.log(response)
-            //    return  response.json()
-            //     //     .then(data =>{
-            //     //     console.log(data)
-            //     //
-            //     // });
-            //
-            // })
-
+            });
+    }
+    cardsData = () => {
+        // if(this.state.userInfo.length > 0){
+        return this.state.userInfo.map((item, index) => {
+            // debugger;
+            // console.log(item, index)
+            return <div key={index} className="card cardOwnStyle col-md-4">
+                <img className="card-img-top" src={item.avatar} alt={`${item.first_name} ${item.last_name} `}/>
+                <div className="card-body">
+                    <h5 className="card-title">{`${item.first_name} ${item.last_name} `}</h5>
+                    <p className="card-text">
+                        email: {item.email}
+                    </p>
+                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                </div>
+            </div>
+        })
+        // }
+        // return <h1>Hi</h1>
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    // }
-    //
-    // componentWillUnmount() {
-    //     console.log('componentWillUnmount')
-    // }
     render() {
-        // console.log(this.state)
-        // const obj ={
-        //     name1: 'Abhi',
-        //     address1: 'hyd'
-        // }
         console.log('user info length ', this.state.userInfo.length)
-        console.log('data ',this.state.userInfo)
-        return(
-            <div>
-                {/*<ClassB name='cnu' address={"hyd"}/>*/}
-                {/*<ClassC name='cnu' address={"hyd"} addr={obj}/>*/}
-                Home page <br />
-
-                <span>a value {this.state.a}</span> <br />
-
-                <button onClick={this.add}>add</button>
+        console.log('data ', this.state.userInfo)
+        return (
+            <div className="col-lg-12">
+                {this.cardsData()}
             </div>
         )
     }
 }
+
 export default Home;

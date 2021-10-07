@@ -8,19 +8,10 @@ import Demo from "../Pages/Demo";
 const Router = () => {
     return (
         <Switch>
-
-            <Route path="/Faq">
-                <Faq/>
-            </Route>
+            <Route exact path="/" component={Home} />
+            <Route path="/Faq" component={Faq} />
             <Route path="/demo" component={Demo} />
-
             <Route path="/Help" component={ Help} />
-
-            <Route path="/">
-                <Home/>
-            </Route>
-
-
         </Switch>
     )
 }
