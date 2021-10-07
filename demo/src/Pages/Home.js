@@ -39,14 +39,16 @@ class Home extends Component {
         return this.state.userInfo.map((item, index) => {
             // debugger;
             // console.log(item, index)
-            return <div key={index} className="card cardOwnStyle col-md-4">
-                <img className="card-img-top" src={item.avatar} alt={`${item.first_name} ${item.last_name} `}/>
-                <div className="card-body">
-                    <h5 className="card-title">{`${item.first_name} ${item.last_name} `}</h5>
-                    <p className="card-text">
-                        email: {item.email}
-                    </p>
-                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+            return <div key={index} className="col-sm-3">
+                <div className="card cardOwnStyle">
+                    <img className="card-img-top" src={item.avatar} alt={`${item.first_name} ${item.last_name} `}/>
+                    <div className="card-body">
+                        <h5 className="card-title">{`${item.first_name} ${item.last_name} `}</h5>
+                        <p className="card-text">
+                            email: {item.email}
+                        </p>
+                        {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                    </div>
                 </div>
             </div>
         })
@@ -58,7 +60,7 @@ class Home extends Component {
         console.log('user info length ', this.state.userInfo.length)
         console.log('data ', this.state.userInfo)
         return (
-            <div className="col-lg-12">
+            <div className="row">
                 {this.cardsData()}
             </div>
         )

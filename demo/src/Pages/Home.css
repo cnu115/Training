@@ -1,4 +1,8 @@
 .cardOwnStyle{
-    width: 18rem;
+    /*width: 18rem;*/
     margin-top: 17px;
+}
+.cardOwnStyle img {
+    width: auto;
+    /*height: 160px;*/
 }
