@@ -1,6 +1,6 @@
 const SearchData = (props) => {
     const {data} = props;
-    console.log('data ', data)
+    // console.log('data ', data)
     return data.map((item, index) => {
         return <div key={index} className="col-sm-3">
             <div className="card cardOwnStyle">

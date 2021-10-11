@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Home.css';
 import SearchData from "./SearchData";
+import Pagination from "../Components/Pagination";
 
 class Home extends Component {
     constructor(props) {
@@ -8,10 +9,12 @@ class Home extends Component {
         this.state = {
             userInfo: [],
             searchInfo: [],
-            isSearch: false
+            isSearch: false,
+            page: 1,
+            total_pages: 0,
         }
         // this.handelChange = this.handelChange.bind(this);
-        console.log('constructor')
+        // console.log('constructor')
     }
 
     componentDidMount() {
@@ -19,25 +22,34 @@ class Home extends Component {
         this.userData();
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    // }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('componentDidUpdate');
+        console.log('prevState ', prevState);
+        console.log('state now ', this.state)
+        if(prevState.page !== this.state.page) {
+            this.userData();
+        }
+    }
 
     componentWillUnmount() {
-        console.log('componentWillUnmount')
+        // console.log('componentWillUnmount')
     }
 
     userData = () => {
-        fetch('https://reqres.in/api/users?page=2', {
+        fetch(`https://reqres.in/api/users?page=${this.state.page}`, {
             method: 'GET'
         })
             .then(response => response.json())
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 this.setState({
-                    userInfo: res.data
+                    userInfo: res.data,
+                    page: res.page,
+                    total_pages: res.total_pages
                 })
             });
     }
+
     cardsData = () => {
         // if(this.state.userInfo.length > 0){
         return this.state.userInfo.map((item, index) => {
@@ -96,19 +108,29 @@ class Home extends Component {
             })
         }
     }
-
+    changePage = (page) => {
+        // debugger;
+        console.log('page ', page)
+        this.setState({
+            page: page
+        })
+    }
     render() {
         // console.log('user info length ', this.state.userInfo.length)
         // console.log('data ', this.state.userInfo)
-        const {isSearch, searchInfo} = this.state;
-        console.log('isSearch ', isSearch)
-        console.log('searchInfo  ', searchInfo)
+        console.log(this.state)
+        const {isSearch} = this.state;
+        // console.log('isSearch ', isSearch)
+        // console.log('searchInfo  ', searchInfo)
         return (
             <div>
                 <div className="example">
                     <input type="text" onChange={(event)=>this.searchFunc(event)} id="search" placeholder="Search.." name="search2" />
                     {/*<input type="text" onChange={this.handelChange} placeholder="Search.." name="search2" />*/}
                     {/*<input type="text" onChange={this.handelChange.bind(this)} placeholder="Search.." name="search2" />*/}
+                </div>
+                <div className="row" >
+                    <Pagination changePage={this.changePage} total_pages={this.state.total_pages} />
                 </div>
                 <div className="row">
                     {/*{!isSearch && this.cardsData()}
