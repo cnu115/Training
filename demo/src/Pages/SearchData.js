@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 const SearchData = (props) => {
     const {data} = props;
     // console.log('data ', data)
@@ -10,10 +12,13 @@ const SearchData = (props) => {
                     <p className="card-text">
                         email: {item.email}
                     </p>
-                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                    <div className="d-grid gap-2 col-6 mx-auto">
+                        <Link to={`/user/${item.id}`} className="btn btn-sm btn-primary">View</Link>
+                    </div>
                 </div>
             </div>
         </div>
+
     })
 }
 
