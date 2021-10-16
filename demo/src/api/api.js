@@ -2,6 +2,7 @@
 const host = `https://reqres.in/`;
 const registrationUrl = 'api/register';
 // const loginUrl = 'api/login';
+const userViewUrl = (id) => `api/users/${id}`
 const usersUrl = (id) =>  `api/users?page=${id}`;
 
 const postData = async (url = '', data = {}) =>{
@@ -16,10 +17,12 @@ const postData = async (url = '', data = {}) =>{
 }
 
 const getData = async (url = '', data = {}) =>{
+    console.log(url)
     const response = await fetch(url, {
         method: 'get',
-        body: JSON.stringify(data)
+        // body: JSON.stringify(data)
     });
+    console.log(response)
     return response.json();
 }
 
@@ -33,6 +36,9 @@ const api = {
     usersList : (id) => {
         return getData(`${host}${usersUrl(id)}`)
     },
+    userView : (id) => {
+        return getData(`${host}${userViewUrl(id)}`)
+    }
 }
 
 export default api;

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './Home.css';
 import SearchData from "./SearchData";
 import Pagination from "../Components/Pagination";
+import api from "../api/api";
 
 class Home extends Component {
     constructor(props) {
@@ -34,10 +35,8 @@ class Home extends Component {
     }
 
     userData = () => {
-        fetch(`https://reqres.in/api/users?page=${this.state.page}`, {
-            method: 'GET'
-        })
-            .then(response => response.json())
+        api.usersList(this.state.page)
+            // .then(response => response.json())
             .then(res => {
                 // console.log(res)
                 this.setState({

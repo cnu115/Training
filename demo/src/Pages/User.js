@@ -15,7 +15,7 @@ class User extends React.Component {
     }
 
     getUser = (id) => {
-        api.usersList(id)
+        api.userView(id)
             .then(results => {
                 console.log('api data ', results);
                 this.setState({
