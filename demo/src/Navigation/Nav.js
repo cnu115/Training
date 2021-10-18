@@ -1,6 +1,13 @@
 import {Link} from "react-router-dom";
+import CheckLogin from "../util/CheckLogin";
 
 const Nav = () => {
+    const isLogin = CheckLogin();
+    console.log(isLogin)
+    const logOut = () => {
+        sessionStorage.clear();
+        window.location.reload()
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -13,21 +20,30 @@ const Nav = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li>
-                                <Link to="/" className="nav-link" aria-current="page">Home</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/Faq">FAQ</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/Help">Help</Link>
-                            </li>
+                            {isLogin && <>
+                                <li>
+                                    <Link to="/" className="nav-link" aria-current="page">Home</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" aria-current="page" to="/Faq">FAQ</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" aria-current="page" to="/Help">Help</Link>
+                                </li>
+                            </>
+                            }
                         </ul>
+                        {!isLogin &&
                         <form className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="Search"
-                                   aria-label="Search"/>
-                            <button className="btn btn-outline-success" type="submit">Search</button>
+                            <Link to={'/login'} className="btn btn-outline-success m-1">Login</Link>
+                            <Link to={'/registration'} className="btn btn-outline-warning m-1">Registration</Link>
                         </form>
+                        }
+                        {isLogin &&
+                        <form className="d-flex">
+                            <button type="button" onClick={logOut} className="btn btn-outline-success m-1">Logout</button>
+                        </form>
+                        }
                     </div>
                 </div>
             </nav>

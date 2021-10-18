@@ -6,9 +6,10 @@ import Help from "../Pages/Help";
 import Demo from "../Pages/Demo";
 import User from "../Pages/User";
 import Registration from "../Components/Registration";
+import Login from "../Components/Login";
+import NotFound from "../Pages/NotFound";
 
-const Router = () => {
-    return (
+const Router = () => (
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/Faq" component={Faq} />
@@ -16,8 +17,10 @@ const Router = () => {
             <Route path="/Help" component={ Help} />
             <Route exact path="/user/:id" component={ User} />
             <Route exact path="/registration" component={ Registration} />
+            <Route exact path="/login" component={ Login} />
+            <Route path="/" component={NotFound} />
         </Switch>
     )
-}
+
 
 export default Router;

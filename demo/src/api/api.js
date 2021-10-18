@@ -1,7 +1,7 @@
 
 const host = `https://reqres.in/`;
 const registrationUrl = 'api/register';
-// const loginUrl = 'api/login';
+const loginUrl = 'api/login';
 const userViewUrl = (id) => `api/users/${id}`
 const usersUrl = (id) =>  `api/users?page=${id}`;
 
@@ -29,6 +29,12 @@ const getData = async (url = '', data = {}) =>{
 const api = {
     registration: (email, password) =>{
         return postData(`${host}${registrationUrl}`, {
+            "email": email,
+            "password": password
+        })
+    },
+    login: (email, password) =>{
+        return postData(`${host}${loginUrl}`, {
             "email": email,
             "password": password
         })
