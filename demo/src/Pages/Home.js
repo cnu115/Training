@@ -15,6 +15,9 @@ class Home extends Component {
             page: 1,
             total_pages: 0,
         }
+        this.interval = '';
+        this.iValue = 0;
+        // this.inter = ''
     }
 
     componentDidMount() {
@@ -24,7 +27,7 @@ class Home extends Component {
         if (!isLogin) {
             return this.props.history.push('/login');
         }
-
+        this.intervalFunc();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -38,6 +41,9 @@ class Home extends Component {
 
     componentWillUnmount() {
         // console.log('componentWillUnmount')
+        // api call
+        console.log('page time ', this.iValue)
+        clearInterval(this.interval);
     }
 
     userData = () => {
@@ -52,7 +58,13 @@ class Home extends Component {
                 })
             });
     }
-
+    intervalFunc = () =>{
+        this.iValue = 0;
+        this.interval = setInterval(()=>{
+            this.iValue = this.iValue+1
+            // console.log('i value', this.iValue);
+        },1000)
+    }
     searchFunc = (e) => {
         const searchValue = e.target.value;
         if (searchValue) {
