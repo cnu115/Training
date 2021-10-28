@@ -24,6 +24,10 @@ const Nav = () => {
                                 <li>
                                     <Link to="/" className="nav-link" aria-current="page">Home</Link>
                                 </li>
+
+                                <li className="nav-item">
+                                    <Link className="nav-link" aria-current="page" to="/todo">Todo</Link>
+                                </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" aria-current="page" to="/Faq">FAQ</Link>
                                 </li>

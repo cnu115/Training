@@ -1,49 +1,56 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const Faq = () => {
-    const [todos, todosMethod] = useState([]);
     //[variable, method] = useState(variable value)
     let [i, updateIvalue] = useState(0);
     const [boole, updateBoolean] = useState(true)
     // this.state = {
     //     todos : [];
-        //    i: 0 //class method
+    //    i: 0 //class method
     // }
     // this.setState(data)
 
+    useEffect(() =>{
+        console.log('acting like a didMount')
+        let i = 0;
+        const interval = window.setInterval(() =>{
+            i = i+1;
+        }, 100)
+        return () =>{
+            console.log('willUnMount')
+            clearInterval(interval)
+        }
+    },[]);
+
+    useEffect(() =>{
+        console.log('acting like a didUpdate')
+    });
+
+    useEffect(()=>{
+        console.log('boole value ', boole)
+    },[boole])
+
+
+    // console.log('todos ', todos)
     const clickHandler = () => {
         // console.log('todos ', todos)
         updateBoolean(!boole)
-        i = i+1;
+        i = i + 1;
         //this.setState(i) //class method
         updateIvalue(i)
-        todosMethod([{
-            userId: 1,
-            id: 1,
-            title: "delectus aut autem",
-            completed: false
-        },
-            {
-                userId: 1,
-                id: 2,
-                title: "quis ut nam facilis et officia qui",
-                completed: false
-            },
-            {
-                userId: 1,
-                id: 3,
-                title: "fugiat veniam minus",
-                completed: false
-            }])
     }
 
     // console.log('todos update ', todos)
     console.log('i value ', i, 'boole ', boole)
     return (
-        <div>
-            {boole && <h1>HI everyone</h1>}
-            <button onClick={clickHandler}>Hooks setState example</button>
-            <h1>FAQ Page</h1>
+        <div style={{"marginTop": "16px !important"}}>
+            {/*<h1>FAQ Page</h1>*/}
+            <div className="d-flex justify-content-center">
+                {boole && <h1><span className="wave">👋🏾</span></h1>}
+            </div>
+            <div className="d-flex justify-content-center">
+                <button type="button" className="btn btn-primary" onClick={clickHandler}>{boole === false ? 'Say' : 'stop' } Hi</button>
+            </div>
         </div>
     )
 };

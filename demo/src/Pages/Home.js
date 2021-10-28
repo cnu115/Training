@@ -4,6 +4,7 @@ import SearchData from "./SearchData";
 import Pagination from "../Components/Pagination";
 import api from "../api/api";
 import CheckLogin from "../util/CheckLogin";
+import Todo from "./Todo";
 
 class Home extends Component {
     constructor(props) {
@@ -101,6 +102,7 @@ class Home extends Component {
                     {!isSearch ? <SearchData data={this.state.userInfo}/> :
                         <SearchData data={this.state.searchInfo}/>}
                 </div>
+                {/*<Todo />*/}
             </div>
         )
     }

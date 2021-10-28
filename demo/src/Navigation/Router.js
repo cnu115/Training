@@ -8,10 +8,12 @@ import User from "../Pages/User";
 import Registration from "../Components/Registration";
 import Login from "../Components/Login";
 import NotFound from "../Pages/NotFound";
+import Todo from "../Pages/Todo";
 
 const Router = () => (
         <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/todo" component={Todo} />
             <Route path="/Faq" component={Faq} />
             <Route path="/demo" component={Demo} />
             <Route path="/Help" component={ Help} />
