@@ -43,13 +43,13 @@ const Faq = () => {
     // console.log('todos update ', todos)
     console.log('i value ', i, 'boole ', boole)
     return (
-        <div style={{"marginTop": "16px !important"}}>
+        <div className="padding">
             {/*<h1>FAQ Page</h1>*/}
             <div className="d-flex justify-content-center">
                 {boole && <h1><span className="wave">👋🏾</span></h1>}
             </div>
             <div className="d-flex justify-content-center">
-                <button type="button" className="btn btn-primary" onClick={clickHandler}>{boole === false ? 'Say' : 'stop' } Hi</button>
+                <button type="button" className="btn btn-primary" onClick={clickHandler}>{boole === false ? 'Say' : 'Stop' } Hi</button>
             </div>
         </div>
     )
