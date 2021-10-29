@@ -29,6 +29,9 @@ const Nav = () => {
                                     <Link className="nav-link" aria-current="page" to="/todo">Todo</Link>
                                 </li>
                                 <li className="nav-item">
+                                    <Link className="nav-link" aria-current="page" to="/redux-counter">Redux</Link>
+                                </li>
+                                <li className="nav-item">
                                     <Link className="nav-link" aria-current="page" to="/Faq">FAQ</Link>
                                 </li>
                                 <li className="nav-item">

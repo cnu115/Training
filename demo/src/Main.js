@@ -1,16 +1,19 @@
+import { Provider as ReduxProvider } from "react-redux";
 import Nav from "./Navigation/Nav";
 import Router from "./Navigation/Router";
 import React from "react";
+import configureStore from './redux/Store';
+const reduxStore = configureStore({counter:0});
 
 const Main = () => {
     const container = "container"
     return(
-        <div className={`${container}`}>
-            <Nav />
-            <Router />
-            {/*<h1>body</h1>*/}
-            {/*<h1>Footer</h1>*/}
-        </div>
+        <ReduxProvider store={reduxStore}>
+            <div className={`${container}`}>
+                <Nav />
+                <Router />
+            </div>
+        </ReduxProvider>
     )
 }
 

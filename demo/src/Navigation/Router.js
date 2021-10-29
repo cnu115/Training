@@ -9,12 +9,14 @@ import Registration from "../Components/Registration";
 import Login from "../Components/Login";
 import NotFound from "../Pages/NotFound";
 import Todo from "../Pages/Todo";
+import Counter from "../Components/Counter";
 
 const Router = () => (
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/todo" component={Todo} />
             <Route path="/Faq" component={Faq} />
+            <Route path="/redux-counter" component={Counter} />
             <Route path="/demo" component={Demo} />
             <Route path="/Help" component={ Help} />
             <Route exact path="/user/:id" component={ User} />
