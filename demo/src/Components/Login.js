@@ -12,17 +12,18 @@ class Login extends React.Component {
             'errorMessage': ''
         }
     }
+
     componentDidMount() {
         const isLogin = CheckLogin();
-        if(isLogin){
+        if (isLogin) {
             return this.props.history.push('/');
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         // debugger;
-        if(prevState.token !== this.state.token){
-            sessionStorage.setItem('token',this.state.token );
+        if (prevState.token !== this.state.token) {
+            sessionStorage.setItem('token', this.state.token);
             window.location.reload();
         }
     }
@@ -36,22 +37,36 @@ class Login extends React.Component {
         const passwordValue = password.value;
 
         if (emailValue && passwordValue) {
-            api.login(emailValue, passwordValue)
-                .then(data => {
-                    const {token, error} = data;
-                    if(error){
-                        this.setState({
-                            errorMessage: error
-                        })
-                    }
-                    if(token) {
-                        this.setState({
-                            'token': token
-                        }, () => {
-                            console.log(this.state)
-                        })
-                    }
+            // api.login(emailValue, passwordValue)
+            //     .then(data => {
+            //         const {token, error} = data;
+            //         if(error){
+            //             this.setState({
+            //                 errorMessage: error
+            //             })
+            //         }
+            //         if(token) {
+            //             this.setState({
+            //                 'token': token
+            //             }, () => {
+            //                 console.log(this.state)
+            //             })
+            //         }
+            //     })
+            const emailValueSess = localStorage.getItem('email');
+            const passwordValueSess = localStorage.getItem('password');
+            // debugger;
+            if (emailValueSess === emailValue && passwordValueSess === passwordValue) {
+                let token = (Math.random() + 1).toString(36).substring(7);
+                console.log("token ", token);
+                this.setState({
+                    'token': token
                 })
+            } else {
+                this.setState({
+                    errorMessage: 'Invalid email or password'
+                })
+            }
         } else {
             // debugger;
             target.classList.add('was-validated');
@@ -74,7 +89,7 @@ class Login extends React.Component {
                         <div className="alert alert-danger" role="alert">
                             {`${this.state.errorMessage}`}
                             <Link to='/registration'> register here</Link>
-                            </div>
+                        </div>
                         }
                         <form className="needs-validation " onSubmit={(e) => this.handelLogin(e)}>
                             <div className="row">

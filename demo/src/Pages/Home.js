@@ -5,6 +5,7 @@ import Pagination from "../Components/Pagination";
 import api from "../api/api";
 import CheckLogin from "../util/CheckLogin";
 import Todo from "./Todo";
+import {connect} from "react-redux";
 
 class Home extends Component {
     constructor(props) {
@@ -24,10 +25,11 @@ class Home extends Component {
     componentDidMount() {
         console.log('componentDidMount');
         this.userData();
-        const isLogin = CheckLogin();
-        if (!isLogin) {
-            return this.props.history.push('/login');
-        }
+        // const isLogin = CheckLogin();
+        // if (!isLogin) {
+        //     return this.props.history.push('/login');
+        // }
+        this.isLoginFun();
         this.intervalFunc();
     }
 
@@ -46,7 +48,13 @@ class Home extends Component {
         console.log('page time ', this.iValue)
         clearInterval(this.interval);
     }
-
+    isLoginFun = () => {
+        if(this.props.isLogin){
+            return this.props.history.push('/');
+        }else{
+            return this.props.history.push('/login');
+        }
+    }
     userData = () => {
         api.usersList(this.state.page)
             // .then(response => response.json())
@@ -107,5 +115,8 @@ class Home extends Component {
         )
     }
 }
-
-export default Home;
+const mapStateToProps = (state) => {
+    console.log('redux state value', state)
+    return state
+}
+export default connect(mapStateToProps, '')(Home);

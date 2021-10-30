@@ -1,8 +1,11 @@
 import {Link} from "react-router-dom";
-import CheckLogin from "../util/CheckLogin";
+// import CheckLogin from "../util/CheckLogin";
+import {connect} from "react-redux";
+import ACTIONS from "../redux/action";
 
-const Nav = () => {
-    const isLogin = CheckLogin();
+const Nav = (props) => {
+    props.authentication();
+    const isLogin = props.isLogin;
     console.log(isLogin)
     const logOut = () => {
         sessionStorage.clear();
@@ -57,5 +60,11 @@ const Nav = () => {
         </div>
     )
 }
-
-export default Nav;
+const mapStateToProps = (state) => {
+    console.log('redux state value', state)
+    return state
+}
+const mapDispatchToProps = (dispatch) => ({
+    authentication: () => dispatch(ACTIONS.authentication())
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

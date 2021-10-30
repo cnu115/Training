@@ -1,6 +1,8 @@
 import React from 'react';
-import api from '../api/api'
-import CheckLogin from "../util/CheckLogin";
+import {connect} from "react-redux";
+// import api from '../api/api'
+// import CheckLogin from "../util/CheckLogin";
+import ACTIONS from '../redux/action'
 
 class Registration extends React.Component {
     constructor(props) {
@@ -10,8 +12,16 @@ class Registration extends React.Component {
         }
     }
     componentDidMount() {
-        const isLogin = CheckLogin();
-        if(isLogin){
+        this.isLoginFun()
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.isLogin !== prevProps.isLogin){
+            this.isLoginFun()
+        }
+    }
+
+    isLoginFun = () => {
+        if(this.props.isLogin){
             return this.props.history.push('/');
         }
     }
@@ -26,10 +36,16 @@ class Registration extends React.Component {
 
         if(emailValue && passwordValue) {
             if(this.checkPassword(passwordValue)) {
-                api.registration(emailValue, passwordValue)
-                    .then(data => {
-                        console.log(data);
-                    })
+                // api.registration(emailValue, passwordValue)
+                //     .then(data => {
+                //         console.log(data);
+                //     })
+                localStorage.setItem('email', emailValue);
+                localStorage.setItem('password', passwordValue);
+                let token = (Math.random() + 1).toString(36).substring(7);
+                sessionStorage.setItem('token', token);
+                // window.location.reload();
+                this.props.authentication();
             }
         }else{
             // debugger;
@@ -41,7 +57,7 @@ class Registration extends React.Component {
     }
     checkPassword = (str) => {
         // debugger;
-        console.log(str)
+        // console.log(str)
         let re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{4,}$/;
         console.log('password test',re.test(str))
         this.setState({
@@ -51,13 +67,14 @@ class Registration extends React.Component {
     }
 
     render() {
-        console.log(this.state.isPasswordValid)
+        // console.log(this.state.isPasswordValid)
         return (
             <div style={{"marginTop": "17px"}}>
                 <div className="card col-6 offset-3">
                     <div className="card-header text-center">
                         Registration
                     </div>
+
                     <div className="card-body ">
                         {/*was-validated*/}
                         <form  className="needs-validation " onSubmit={(e) => this.handelRegistration(e)}>
@@ -107,5 +124,12 @@ class Registration extends React.Component {
         )
     }
 }
+const mapDispatchToProps = (dispatch) => ({
+    authentication: () => dispatch(ACTIONS.authentication())
+});
 
-export default Registration;
+const mapStateToProps = (state) => {
+    console.log('redux state value', state)
+    return state
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

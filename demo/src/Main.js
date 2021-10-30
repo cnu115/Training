@@ -3,7 +3,7 @@ import Nav from "./Navigation/Nav";
 import Router from "./Navigation/Router";
 import React from "react";
 import configureStore from './redux/Store';
-const reduxStore = configureStore({counter:0});
+const reduxStore = configureStore(undefined);
 
 const Main = () => {
     const container = "container"

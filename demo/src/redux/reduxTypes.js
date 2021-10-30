@@ -1,6 +1,8 @@
 const Types = {
     ADDITION: "ADDITION",
-    SUBTRACTION: "SUBTRACTION"
+    SUBTRACTION: "SUBTRACTION",
+    AUTHENTICATION: "AUTHENTICATION",
+    USERS: "USERS",
 };
 
 export default Types

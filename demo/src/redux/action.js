@@ -10,8 +10,12 @@ const increaseCounter = () => ({
 const decreaseCounter = () => ({
     type: Types.SUBTRACTION,
 });
+const authentication = () => ({
+    type: Types.AUTHENTICATION
+})
 
 export default {
     increaseCounter,
     decreaseCounter,
+    authentication
 }
