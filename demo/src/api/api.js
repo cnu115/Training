@@ -22,7 +22,7 @@ const getData = async (url = '', data = {}) =>{
         method: 'get',
         // body: JSON.stringify(data)
     });
-    console.log(response)
+    // console.log(response)
     return response.json();
 }
 

@@ -6,18 +6,39 @@ import './counter.css';
 const Counter = (props) => {
     console.log(props)
 
-    // useEffect(() => {
-    //     // debugger;
-    //     if (props && props.isLogin) {
-    //         if (!props.isLogin) {
-    //             return this.props.history.push('/login');
-    //         }
-    //     }
-    // }, [props.isLogin])
-    console.log(Actions.increaseCounter())
+    useEffect(() => {
+        if (!props.isLogin) {
+            return props.history.push('/login');
+        }
+    }, [props.isLogin]);
+
+    useEffect(() => {
+        // debugger;
+        props.getPhotos()
+    },[])
+    // console.log(Actions.increaseCounter(123))
+   const getPhotosFromRedux = () => {
+       // debugger;
+       const {photos} = props;
+        if(photos.length > 0){
+            return photos.map((data, i) => {
+                return (<div className="card" style={{"width": "18rem"}}>
+                    <img className="card-img-top" src={data.thumbnailUrl} alt="Card image cap"/>
+                    <div className="card-body">
+                        <p className="card-text">{data.title}</p>
+                    </div>
+                </div>)
+            })
+        }
+    }
     return (
 
         <div className="padding">
+            {props.isLoading &&
+                <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            }
             <div className="row text-center">
                 {/*<div className="col-sm-5">*/}
                 {/*    Counter : {props.counter}*/}
@@ -33,7 +54,7 @@ const Counter = (props) => {
 
             <div className="row text-center">
                 <div className="col-sm-6">
-                    <button type="button" onClick={() => props.increaseCounter()} className="btn btn-primary">Increase
+                    <button type="button" onClick={() => props.increaseCounter(123)} className="btn btn-primary">Increase
                         counter
                     </button>
                 </div>
@@ -43,6 +64,7 @@ const Counter = (props) => {
                     </button>
                 </div>
             </div>
+            {getPhotosFromRedux()}
         </div>
 
     )
@@ -53,8 +75,9 @@ const mapStateToProps = (state) => {
     return state
 }
 const mapDispatchToProps = dispatch => ({
-    increaseCounter: () => dispatch(Actions.increaseCounter()),
-    decreaseCounter: () => dispatch(Actions.decreaseCounter())
+    increaseCounter: (data) => dispatch(Actions.increaseCounter(data)),
+    decreaseCounter: () => dispatch(Actions.decreaseCounter()),
+    getPhotos: () => dispatch(Actions.getPhotos()),
     // increaseCounter: () => dispatch({ type: "ADDITION"})
 });
 

@@ -34,9 +34,9 @@ class Home extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('componentDidUpdate');
-        console.log('prevState ', prevState);
-        console.log('state now ', this.state)
+        // console.log('componentDidUpdate');
+        // console.log('prevState ', prevState);
+        // console.log('state now ', this.state)
         if (prevState.page !== this.state.page) {
             this.userData();
         }
@@ -45,7 +45,7 @@ class Home extends Component {
     componentWillUnmount() {
         // console.log('componentWillUnmount')
         // api call
-        console.log('page time ', this.iValue)
+        // console.log('page time ', this.iValue)
         clearInterval(this.interval);
     }
     isLoginFun = () => {

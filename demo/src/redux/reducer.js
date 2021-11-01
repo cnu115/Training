@@ -2,6 +2,8 @@ import Types from "./reduxTypes";
 const defaultState = {
     counter:0,
     isLogin: false,
+    photos: [],
+    isLoading: false
 }
 const reducer = (state = defaultState, action) => {
     console.log('state ', state)
@@ -17,6 +19,7 @@ const reducer = (state = defaultState, action) => {
     switch (action.type) {
         case Types.ADDITION:{
             console.log('ADDITION')
+            console.log('payload ', action.payload)
             return {
                 ...state,
                 counter: state.counter+1
@@ -35,6 +38,24 @@ const reducer = (state = defaultState, action) => {
             return {
                 ...state,
                 isLogin: token ? true : false
+            }
+        }
+        case Types.GET_PHOTOS: {
+            return {
+                ...state,
+                photos: action.photos
+            }
+        }
+        case Types.GET_PHOTOS_REQ: {
+            return {
+                ...state,
+                isLoading: true
+            }
+        }
+        case Types.GET_PHOTOS_REQ_END: {
+            return {
+                ...state,
+                isLoading: false
             }
         }
         default: return state
